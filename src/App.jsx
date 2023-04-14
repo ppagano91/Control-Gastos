@@ -4,11 +4,12 @@ import IconoNuevoGasto from './img/nuevo-gasto.svg'
 import Modal from './components/Modal'
 
 function App() {
-  const [presupuesto, setPresupuesto] = useState(0)
-  const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
+  const [presupuesto, setPresupuesto] = useState(0);
+  const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
 
-  const [modal, setModal] = useState(false)
-  const [animarModal, setAnimarModal] = useState(false)
+  const [modal, setModal] = useState(false);
+  const [animarModal, setAnimarModal] = useState(false);
+  const [gastos, setGastos] = useState([]);
 
 
   const handleGasto = () => {
@@ -18,6 +19,10 @@ function App() {
       setAnimarModal(true)
     }, 500)
 
+  };
+
+  const guardarGasto = gasto =>{
+    console.log(gasto)
   }
 
 
@@ -42,7 +47,12 @@ function App() {
       )}
 
       {modal && 
-        <Modal setModal={setModal} animarModal={animarModal} setAnimarModal={setAnimarModal}/>}
+        <Modal
+          setModal={setModal}
+          animarModal={animarModal}
+          setAnimarModal={setAnimarModal}
+          guardarGasto={guardarGasto}
+          />}
       
       
     </div>
