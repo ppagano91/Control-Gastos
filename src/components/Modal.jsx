@@ -13,6 +13,28 @@ const Modal = ({setModal,animarModal,setAnimarModal}) => {
         </div>
         <form className={`formulario ${animarModal? 'animar':'cerrar'}`}>
             <legend>Nuevo Gasto</legend>
+            <div className='campo'>
+                <label htmlFor="nombre">Nombre Gasto</label>
+                <input id="nombre" type="text" placeholder='Añade nuevo gasto'/>
+            </div>
+            <div className='campo'>
+                <label htmlFor="cantidad">Cantidad</label>
+                <input id="cantidad" type="number" placeholder='Añade cantidad de gasto, ej: 500'/>
+            </div>
+
+            <div className='campo'>
+                <label htmlFor="categoria">Categoría</label>
+                <select name="" id="categoria">
+                    <option value="">-- Seleccione --</option>
+                    <option value="ahorro">Ahorro</option>
+                    <option value="Comida">Comida</option>
+                    <option value="casa">Casa</option>
+                    <option value="ocio">Ocio</option>
+                    <option value="salud">Salud</option>
+                    <option value="suscripciones">Suscripciones</option>
+                </select>                
+            </div>
+            <input type="submit" value="Añadir Gasto"/>
         </form>
     </div>
   )
