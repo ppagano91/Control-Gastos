@@ -10,7 +10,7 @@ const Header = ({
   }) => {
   return (
     <header>
-        <h1>Planificado de Gastos</h1>
+        <h1>Planificador de Gastos</h1>
         {console.log(isValidPresupuesto)}
         {isValidPresupuesto ? 
         (<ControlPresupuesto
