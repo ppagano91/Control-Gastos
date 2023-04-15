@@ -1,54 +1,71 @@
-import React from 'react'
-import {useState, useEffect } from 'react'
+import React from "react";
+import { useState, useEffect } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
+const ControlPresupuesto = ({ gastos, presupuesto }) => {
+  const [disponible, setDisponible] = useState(0);
+  const [gastado, setGastado] = useState(0);
+  const [porcentaje, setPorcentaje] = useState(0);
 
-const ControlPresupuesto = ({gastos, presupuesto}) => {
-    const [disponible, setDisponible] = useState(0);
-    const [gastado, setGastado] = useState(0)
+  useEffect(() => {
+    const valorInicial = 0;
+    const totalGastado = gastos.reduce(
+      (total, gasto) => gasto.cantidad + total,
+      valorInicial
+    );
 
-    useEffect(() => {
-      const valorInicial = 0;
-      const totalGastado = gastos.reduce((total, gasto)=>gasto.cantidad+total, valorInicial
-      );
-      const totalDisponible = presupuesto-totalGastado;
-      setDisponible(totalDisponible);
-      setGastado(totalGastado);
-    }, [gastos])
-    
+    const totalDisponible = presupuesto - totalGastado;
 
-    const handleCurrency = (valor) =>{
-        return valor.toLocaleString('en-US',{ style: 'currency', currency: 'USD'})
+    const nuevoPorcentaje = (
+      (100 * (presupuesto - totalDisponible)) /
+      presupuesto
+    ).toFixed(2);
 
-    }
+    setDisponible(totalDisponible);
+    setGastado(totalGastado);
+    setTimeout(() => {
+      setPorcentaje(nuevoPorcentaje);
+    }, 1000);
+  }, [gastos]);
+
+  const handleCurrency = (valor) => {
+    return valor.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  };
   return (
-    <div className='contenedor-presupuesto contenedor sombra dos-columnas'>
-        <div className=''>
-            <p>Gráfica aquí</p>
-        </div>
-        <div className='contenido-presupuesto'>
-            <p>
-                <span>
-                    Presupuesto: 
-                </span>
-                {handleCurrency(presupuesto)}
-            </p>
+    <div className="contenedor-presupuesto contenedor sombra dos-columnas">
+      <div className="">
+        <CircularProgressbar
+          value={porcentaje}
+          styles={buildStyles({
+            pathColor: "#3B82F6",
+            trailColor: "#F5F5F5",
+            textColor: "#3B82F6",
+          })}
+          text={`${porcentaje}% Gastado`}
+        />
+      </div>
+      <div className="contenido-presupuesto">
+        <p>
+          <span>Presupuesto:</span>
+          {handleCurrency(presupuesto)}
+        </p>
 
-            <p>
-                <span>
-                    Disponible: 
-                </span>
-                {handleCurrency(disponible)}
-            </p>
+        <p>
+          <span>Disponible:</span>
+          {handleCurrency(disponible)}
+        </p>
 
-            <p>
-                <span>
-                    Gastado: 
-                </span>
-                {handleCurrency(gastado)}
-            </p>
-        </div>
+        <p>
+          <span>Gastado:</span>
+          {handleCurrency(gastado)}
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ControlPresupuesto
+export default ControlPresupuesto;
