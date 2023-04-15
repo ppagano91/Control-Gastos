@@ -18,7 +18,7 @@ import IconoOcio from "../img/icono_ocio.svg";
 import IconoSalud from "../img/icono_salud.svg";
 import IconoSuscripciones from "../img/icono_suscripciones.svg";
 
-const diccionarioIconoes = {
+const diccionarioIconos = {
   ahorro: IconoAhorro,
   comida: IconoComida,
   casa: IconoCasa,
@@ -54,7 +54,7 @@ const Gasto = ({ gasto, setGastoEditar }) => {
       >
         <div className="gasto sombra">
           <div className="contenido-gasto">
-            <img src={diccionarioIconoes[categoria]} alt="Icono Gasto" />
+            <img src={diccionarioIconos[categoria]} alt="Icono Gasto" />
             <div className="descripcion-gasto">
               <p className="categoria">{categoria}</p>
               <p className="nombre-gasto">{nombre}</p>
