@@ -55,7 +55,7 @@ const Modal = ({
         onSubmit={handleSumbit}
         className={`formulario ${animarModal ? "animar" : "cerrar"}`}
       >
-        <legend>{gastoEditar ? "Editar Gasto" : "Nuevo Gasto"}</legend>
+        <legend>{gastoEditar.nombre ? "Editar Gasto" : "Nuevo Gasto"}</legend>
         {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
         <div className="campo">
           <label htmlFor="nombre">Nombre Gasto</label>
@@ -101,7 +101,7 @@ const Modal = ({
         </div>
         <input
           type="submit"
-          value={gastoEditar ? "Guardar Cambios" : "Añadir Gasto"}
+          value={gastoEditar.nombre ? "Guardar Cambios" : "Añadir Gasto"}
         />
       </form>
     </div>
