@@ -22,6 +22,9 @@ function App() {
   );
   const [gastoEditar, setGastoEditar] = useState({});
 
+  const [filtro, setFiltro] = useState("");
+  const [gastosFiltrados, setGastosFiltrados] = useState([]);
+
   const handleNuevoGasto = () => {
     setModal(true);
     setGastoEditar({});
@@ -37,7 +40,7 @@ function App() {
         gastoState.id === gasto.id ? gasto : gastoState
       );
       setGastos(gastosActualizados);
-      //setGastoEditar({});
+      setGastoEditar({});
     } else {
       gasto.id = generarId();
       gasto.fecha = Date.now();
@@ -74,6 +77,16 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (filtro) {
+      const gastosFiltrados = gastos.filter(
+        (gasto) => gasto.categoria === filtro
+      );
+      console.log(gastosFiltrados);
+      setGastosFiltrados(gastosFiltrados);
+    }
+  }, [filtro]);
+
+  useEffect(() => {
     localStorage.setItem("gastos", JSON.stringify(gastos) ?? []);
   }, [gastos]);
 
@@ -100,6 +113,8 @@ function App() {
               gastos={gastos}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
+              filtro={filtro}
+              gastosFiltrados={gastosFiltrados}
             />
           </main>
           <div className="nuevo-gasto">
